@@ -1,68 +1,74 @@
-/*****************************************************************************
- * Open MCT, Copyright (c) 2014-2021, United States Government
- * as represented by the Administrator of the National Aeronautics and Space
- * Administration. All rights reserved.
- *
- * Open MCT is licensed under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0.
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations
- * under the License.
- *
- * Open MCT includes source code licensed under additional open source
- * licenses. See the Open Source Licenses file (LICENSES.md) included with
- * this source code distribution or the Licensing information page available
- * at runtime from the About dialog for additional information.
- *****************************************************************************/
+<!-- eslint-disable vue/multi-word-component-names -->
+<!--
+ Open MCT, Copyright (c) 2014-2021, United States Government
+ as represented by the Administrator of the National Aeronautics and Space
+ Administration. All rights reserved.
+
+ Open MCT is licensed under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ http://www.apache.org/licenses/LICENSE-2.0.
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ License for the specific language governing permissions and limitations
+ under the License.
+
+ Open MCT includes source code licensed under additional open source
+ licenses. See the Open Source Licenses file (LICENSES.md) included with
+ this source code distribution or the Licensing information page available
+ at runtime from the About dialog for additional information.
+-->
 
 <template>
 <div class="c-notebook">
     <div class="c-notebook__head">
-        <Search class="c-notebook__search"
-                :value="search"
-                @input="search = $event"
-                @clear="resetSearch()"
+        <Search
+            class="c-notebook__search"
+            :value="search"
+            @input="search = $event"
+            @clear="resetSearch()"
         />
     </div>
-    <SearchResults v-if="search.length"
-                   ref="searchResults"
-                   :domain-object="domainObject"
-                   :results="searchResults"
-                   @changeSectionPage="changeSelectedSection"
-                   @updateEntries="updateEntries"
+    <SearchResults
+        v-if="search.length"
+        ref="searchResults"
+        :domain-object="domainObject"
+        :results="searchResults"
+        @changeSectionPage="changeSelectedSection"
+        @updateEntries="updateEntries"
     />
-    <div v-if="!search.length"
-         class="c-notebook__body"
+    <div
+        v-if="!search.length"
+        class="c-notebook__body"
     >
-        <Sidebar ref="sidebar"
-                 class="c-notebook__nav c-sidebar c-drawer c-drawer--align-left"
-                 :class="[{'is-expanded': showNav}, {'c-drawer--push': !sidebarCoversEntries}, {'c-drawer--overlays': sidebarCoversEntries}]"
-                 :default-page-id="defaultPageId"
-                 :selected-page-id="getSelectedPageId()"
-                 :default-section-id="defaultSectionId"
-                 :selected-section-id="getSelectedSectionId()"
-                 :domain-object="domainObject"
-                 :page-title="domainObject.configuration.pageTitle"
-                 :section-title="domainObject.configuration.sectionTitle"
-                 :sections="sections"
-                 :sidebar-covers-entries="sidebarCoversEntries"
-                 @defaultPageDeleted="cleanupDefaultNotebook"
-                 @defaultSectionDeleted="cleanupDefaultNotebook"
-                 @pagesChanged="pagesChanged"
-                 @selectPage="selectPage"
-                 @sectionsChanged="sectionsChanged"
-                 @selectSection="selectSection"
-                 @toggleNav="toggleNav"
+        <Sidebar
+            ref="sidebar"
+            class="c-notebook__nav c-sidebar c-drawer c-drawer--align-left"
+            :class="[{'is-expanded': showNav}, {'c-drawer--push': !sidebarCoversEntries}, {'c-drawer--overlays': sidebarCoversEntries}]"
+            :default-page-id="defaultPageId"
+            :selected-page-id="getSelectedPageId()"
+            :default-section-id="defaultSectionId"
+            :selected-section-id="getSelectedSectionId()"
+            :domain-object="domainObject"
+            :page-title="domainObject.configuration.pageTitle"
+            :section-title="domainObject.configuration.sectionTitle"
+            :sections="sections"
+            :sidebar-covers-entries="sidebarCoversEntries"
+            @defaultPageDeleted="cleanupDefaultNotebook"
+            @defaultSectionDeleted="cleanupDefaultNotebook"
+            @pagesChanged="pagesChanged"
+            @selectPage="selectPage"
+            @sectionsChanged="sectionsChanged"
+            @selectSection="selectSection"
+            @toggleNav="toggleNav"
         />
         <div class="c-notebook__page-view">
             <div class="c-notebook__page-view__header">
-                <button class="c-notebook__toggle-nav-button c-icon-button c-icon-button--major icon-menu-hamburger"
-                        @click="toggleNav"
+                <button
+                    class="c-notebook__toggle-nav-button c-icon-button c-icon-button--major icon-menu-hamburger"
+                    @click="toggleNav"
                 ></button>
                 <div class="c-notebook__page-view__path c-path">
                     <span class="c-notebook__path__section c-path__item">
@@ -73,59 +79,70 @@
                     </span>
                 </div>
                 <div class="c-notebook__page-view__controls">
-                    <select v-model="showTime"
-                            class="c-notebook__controls__time"
+                    <select
+                        v-model="showTime"
+                        class="c-notebook__controls__time"
                     >
-                        <option value="0"
-                                :selected="showTime === 0"
+                        <option
+                            value="0"
+                            :selected="showTime === 0"
                         >
                             Show all
                         </option>
-                        <option value="1"
-                                :selected="showTime === 1"
+                        <option
+                            value="1"
+                            :selected="showTime === 1"
                         >Last hour</option>
-                        <option value="8"
-                                :selected="showTime === 8"
+                        <option
+                            value="8"
+                            :selected="showTime === 8"
                         >Last 8 hours</option>
-                        <option value="24"
-                                :selected="showTime === 24"
+                        <option
+                            value="24"
+                            :selected="showTime === 24"
                         >Last 24 hours</option>
                     </select>
-                    <select v-model="defaultSort"
-                            class="c-notebook__controls__time"
+                    <select
+                        v-model="defaultSort"
+                        class="c-notebook__controls__time"
                     >
-                        <option value="newest"
-                                :selected="defaultSort === 'newest'"
+                        <option
+                            value="newest"
+                            :selected="defaultSort === 'newest'"
                         >Newest first</option>
-                        <option value="oldest"
-                                :selected="defaultSort === 'oldest'"
+                        <option
+                            value="oldest"
+                            :selected="defaultSort === 'oldest'"
                         >Oldest first</option>
                     </select>
                 </div>
             </div>
-            <div class="c-notebook__drag-area icon-plus"
-                 @click="newEntry()"
-                 @dragover="dragOver"
-                 @drop.capture="dropCapture"
-                 @drop="dropOnEntry($event)"
+            <div
+                class="c-notebook__drag-area icon-plus"
+                @click="newEntry()"
+                @dragover="dragOver"
+                @drop.capture="dropCapture"
+                @drop="dropOnEntry($event)"
             >
                 <span class="c-notebook__drag-area__label">
                     To start a new entry, click here or drag and drop any object
                 </span>
             </div>
-            <div v-if="selectedSection && selectedPage"
-                 ref="notebookEntries"
-                 class="c-notebook__entries"
+            <div
+                v-if="selectedSection && selectedPage"
+                ref="notebookEntries"
+                class="c-notebook__entries"
             >
-                <NotebookEntry v-for="entry in filteredAndSortedEntries"
-                               :key="entry.id"
-                               :entry="entry"
-                               :domain-object="domainObject"
-                               :selected-page="selectedPage"
-                               :selected-section="selectedSection"
-                               :read-only="false"
-                               @deleteEntry="deleteEntry"
-                               @updateEntry="updateEntry"
+                <NotebookEntry
+                    v-for="entry in filteredAndSortedEntries"
+                    :key="entry.id"
+                    :entry="entry"
+                    :domain-object="domainObject"
+                    :selected-page="selectedPage"
+                    :selected-section="selectedSection"
+                    :read-only="false"
+                    @deleteEntry="deleteEntry"
+                    @updateEntry="updateEntry"
                 />
             </div>
         </div>

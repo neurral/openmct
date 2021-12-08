@@ -27,13 +27,15 @@
             Object Style
         </div>
         <div class="c-inspect-styles__content">
-            <div v-if="staticStyle"
-                 class="c-inspect-styles__style"
+            <div
+                v-if="staticStyle"
+                class="c-inspect-styles__style"
             >
-                <StyleEditor class="c-inspect-styles__editor"
-                             :style-item="staticStyle"
-                             :is-editing="isEditing"
-                             @persist="updateStaticStyle"
+                <StyleEditor
+                    class="c-inspect-styles__editor"
+                    :style-item="staticStyle"
+                    :is-editing="isEditing"
+                    @persist="updateStaticStyle"
                 />
             </div>
             <button
@@ -50,9 +52,10 @@
             Conditional Object Styles
         </div>
         <div class="c-inspect-styles__content c-inspect-styles__condition-set">
-            <a v-if="conditionSetDomainObject"
-               class="c-object-label icon-conditional"
-               @click="navigateOrPreview"
+            <a
+                v-if="conditionSetDomainObject"
+                class="c-object-label icon-conditional"
+                @click="navigateOrPreview"
             >
                 <span class="c-object-label__name">{{ conditionSetDomainObject.name }}</span>
             </a>
@@ -65,32 +68,38 @@
                     <span class="c-button__label">Change...</span>
                 </button>
 
-                <button class="c-click-icon icon-x"
-                        title="Remove conditional styles"
-                        @click="removeConditionSet"
+                <button
+                    class="c-click-icon icon-x"
+                    title="Remove conditional styles"
+                    @click="removeConditionSet"
                 ></button>
             </template>
         </div>
 
-        <div v-if="conditionsLoaded"
-             class="c-inspect-styles__conditions"
+        <div
+            v-if="conditionsLoaded"
+            class="c-inspect-styles__conditions"
         >
-            <div v-for="(conditionStyle, index) in conditionalStyles"
-                 :key="index"
-                 class="c-inspect-styles__condition"
-                 :class="{'is-current': conditionStyle.conditionId === selectedConditionId}"
-                 @click="applySelectedConditionStyle(conditionStyle.conditionId)"
+            <div
+                v-for="(conditionStyle, index) in conditionalStyles"
+                :key="index"
+                class="c-inspect-styles__condition"
+                :class="{'is-current': conditionStyle.conditionId === selectedConditionId}"
+                @click="applySelectedConditionStyle(conditionStyle.conditionId)"
             >
-                <condition-error :show-label="true"
-                                 :condition="getCondition(conditionStyle.conditionId)"
+                <condition-error
+                    :show-label="true"
+                    :condition="getCondition(conditionStyle.conditionId)"
                 />
-                <condition-description :show-label="true"
-                                       :condition="getCondition(conditionStyle.conditionId)"
+                <condition-description
+                    :show-label="true"
+                    :condition="getCondition(conditionStyle.conditionId)"
                 />
-                <StyleEditor class="c-inspect-styles__editor"
-                             :style-item="conditionStyle"
-                             :is-editing="isEditing"
-                             @persist="updateConditionalStyle"
+                <StyleEditor
+                    class="c-inspect-styles__editor"
+                    :style-item="conditionStyle"
+                    :is-editing="isEditing"
+                    @persist="updateConditionalStyle"
                 />
             </div>
         </div>

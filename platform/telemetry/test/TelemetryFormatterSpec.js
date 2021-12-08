@@ -57,6 +57,7 @@ define(
             });
 
             it("formats ranges as values", function () {
+                // eslint-disable-next-line no-loss-of-precision
                 var value = 3.14159265352979323846264338, // not pi
                     formatted = formatter.formatRangeValue(value);
                 // Make sure we don't lose information by formatting

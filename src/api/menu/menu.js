@@ -20,8 +20,8 @@
  * at runtime from the About dialog for additional information.
  *****************************************************************************/
 import EventEmitter from 'EventEmitter';
-import MenuComponent from './components/Menu.vue';
-import SuperMenuComponent from './components/SuperMenu.vue';
+import RegularMenu from './components/RegularMenu.vue';
+import SuperMenu from './components/SuperMenu.vue';
 import Vue from 'vue';
 
 export const MENU_PLACEMENT = {
@@ -72,12 +72,12 @@ class Menu extends EventEmitter {
     showMenu() {
         this.component = new Vue({
             components: {
-                MenuComponent
+                MenuComponent: RegularMenu
             },
             provide: {
                 options: this.options
             },
-            template: '<menu-component />'
+            template: '<regular-menu />'
         });
 
         this.show();
@@ -86,12 +86,12 @@ class Menu extends EventEmitter {
     showSuperMenu() {
         this.component = new Vue({
             components: {
-                SuperMenuComponent
+                SuperMenu
             },
             provide: {
                 options: this.options
             },
-            template: '<super-menu-component />'
+            template: '<super-menu />'
         });
 
         this.show();

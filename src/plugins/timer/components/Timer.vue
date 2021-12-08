@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <!--
  Open MCT, Copyright (c) 2009-2021, United States Government
  as represented by the Administrator of the National Aeronautics and Space
@@ -32,10 +33,11 @@
             :class="[{'hide': timerState === 'stopped' }]"
             @click="restartTimer"
         ></button>
-        <button :title="timerStateButtonText"
-                class="c-timer__ctrl-pause-play c-icon-button c-icon-button--major"
-                :class="[timerStateButtonIcon]"
-                @click="toggleStateButton"
+        <button
+            :title="timerStateButtonText"
+            class="c-timer__ctrl-pause-play c-icon-button c-icon-button--major"
+            :class="[timerStateButtonIcon]"
+            @click="toggleStateButton"
         ></button>
     </div>
     <div

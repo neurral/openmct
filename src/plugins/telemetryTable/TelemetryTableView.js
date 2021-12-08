@@ -1,5 +1,5 @@
-import TableComponent from './components/table.vue';
-import TelemetryTable from './TelemetryTable';
+import TelemetryTable from './components/TelemetryTable.vue';
+import TelemetryTableState from './TelemetryTable';
 import Vue from 'vue';
 
 export default class TelemetryTableView {
@@ -9,7 +9,7 @@ export default class TelemetryTableView {
         this.objectPath = objectPath;
         this.component = undefined;
 
-        this.table = new TelemetryTable(domainObject, openmct);
+        this.table = new TelemetryTableState(domainObject, openmct);
     }
 
     getViewContext() {
@@ -41,7 +41,7 @@ export default class TelemetryTableView {
         this.component = new Vue({
             el: element,
             components: {
-                TableComponent
+                TelemetryTable
             },
             provide: {
                 openmct: this.openmct,
@@ -61,7 +61,9 @@ export default class TelemetryTableView {
                     }
                 };
             },
-            template: '<table-component ref="tableComponent" :is-editing="isEditing" :marking="marking"></table-component>'
+            template: /*html*/`
+                <telemetry-table ref="tableComponent" :is-editing="isEditing" :marking="marking"></telemetry-table>
+            `
         });
     }
 }

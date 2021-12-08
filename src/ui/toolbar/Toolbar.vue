@@ -1,3 +1,5 @@
+<!-- eslint-disable vue/multi-word-component-names -->
+
 <template>
 <div class="c-toolbar">
     <div class="c-toolbar__element-controls">
@@ -181,7 +183,7 @@ export default {
                 property = property + "." + formKey;
             }
 
-            return _.get(domainObject, property);
+            return domainObject?.[property];
         },
         getFormValue(domainObject, toolbarItem) {
             let value = {};

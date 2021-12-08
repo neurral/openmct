@@ -19,48 +19,46 @@
  * this source code distribution or the Licensing information page available
  * at runtime from the About dialog for additional information.
  *****************************************************************************/
-define(function () {
-    class TelemetryTableColumn {
-        constructor(openmct, metadatum, options = {selectable: false}) {
-            this.metadatum = metadatum;
-            this.formatter = openmct.telemetry.getValueFormatter(metadatum);
-            this.titleValue = this.metadatum.name;
-            this.selectable = options.selectable;
-        }
 
-        getKey() {
-            return this.metadatum.key;
-        }
+export default
+class TelemetryTableColumn {
+    constructor(openmct, metadatum, options = {selectable: false}) {
+        this.metadatum = metadatum;
+        this.formatter = openmct.telemetry.getValueFormatter(metadatum);
+        this.titleValue = this.metadatum.name;
+        this.selectable = options.selectable;
+    }
 
-        getTitle() {
-            return this.metadatum.name;
-        }
+    getKey() {
+        return this.metadatum.key;
+    }
 
-        getMetadatum() {
-            return this.metadatum;
-        }
+    getTitle() {
+        return this.metadatum.name;
+    }
 
-        hasValueForDatum(telemetryDatum) {
-            return Object.prototype.hasOwnProperty.call(telemetryDatum, this.metadatum.source);
-        }
+    getMetadatum() {
+        return this.metadatum;
+    }
 
-        getRawValue(telemetryDatum) {
-            return telemetryDatum[this.metadatum.source];
-        }
+    hasValueForDatum(telemetryDatum) {
+        return Object.prototype.hasOwnProperty.call(telemetryDatum, this.metadatum.source);
+    }
 
-        getFormattedValue(telemetryDatum) {
-            let formattedValue = this.formatter.format(telemetryDatum);
-            if (formattedValue !== undefined && typeof formattedValue !== 'string') {
-                return formattedValue.toString();
-            } else {
-                return formattedValue;
-            }
-        }
+    getRawValue(telemetryDatum) {
+        return telemetryDatum[this.metadatum.source];
+    }
 
-        getParsedValue(telemetryDatum) {
-            return this.formatter.parse(telemetryDatum);
+    getFormattedValue(telemetryDatum) {
+        let formattedValue = this.formatter.format(telemetryDatum);
+        if (formattedValue !== undefined && typeof formattedValue !== 'string') {
+            return formattedValue.toString();
+        } else {
+            return formattedValue;
         }
     }
 
-    return TelemetryTableColumn;
-});
+    getParsedValue(telemetryDatum) {
+        return this.formatter.parse(telemetryDatum);
+    }
+}

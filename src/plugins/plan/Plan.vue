@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <!--
  Open MCT, Copyright (c) 2014-2020, United States Government
  as represented by the Administrator of the National Aeronautics and Space
@@ -21,8 +22,9 @@
 -->
 
 <template>
-<div ref="plan"
-     class="c-plan c-timeline-holder"
+<div
+    ref="plan"
+    class="c-plan c-timeline-holder"
 >
     <template v-if="viewBounds && !options.compact">
         <swim-lane>
@@ -36,8 +38,9 @@
             />
         </swim-lane>
     </template>
-    <div ref="planHolder"
-         class="c-plan__contents u-contents"
+    <div
+        ref="planHolder"
+        class="c-plan__contents u-contents"
     >
     </div>
 </div>

@@ -27,28 +27,32 @@
     </div>
     <div class="c-overlay__contents-main c-selector c-tree-and-search">
         <div class="c-tree-and-search__search">
-            <search ref="shell-search"
-                    class="c-search"
-                    :value="searchValue"
-                    @input="searchTree"
-                    @clear="searchTree"
+            <search
+                ref="shell-search"
+                class="c-search"
+                :value="searchValue"
+                @input="searchTree"
+                @clear="searchTree"
             />
         </div>
 
         <!-- loading -->
-        <div v-if="isLoading"
-             class="c-tree-and-search__loading loading"
+        <div
+            v-if="isLoading"
+            class="c-tree-and-search__loading loading"
         ></div>
         <!-- end loading -->
 
-        <div v-if="shouldDisplayNoResultsText"
-             class="c-tree-and-search__no-results"
+        <div
+            v-if="shouldDisplayNoResultsText"
+            class="c-tree-and-search__no-results"
         >
             No results found
         </div>
 
         <!-- main tree -->
-        <ul v-if="!isLoading"
+        <ul
+            v-if="!isLoading"
             v-show="!searchValue"
             class="c-tree-and-search__tree c-tree"
         >
@@ -63,7 +67,8 @@
         <!-- end main tree -->
 
         <!-- search tree -->
-        <ul v-if="searchValue && !isLoading"
+        <ul
+            v-if="searchValue && !isLoading"
             class="c-tree-and-search__tree c-tree"
         >
             <condition-set-dialog-tree-item

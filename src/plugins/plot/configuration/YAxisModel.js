@@ -19,7 +19,7 @@
  * this source code distribution or the Licensing information page available
  * at runtime from the About dialog for additional information.
  *****************************************************************************/
-import _ from 'lodash';
+
 import Model from './Model';
 
 /**
@@ -167,7 +167,7 @@ export default class YAxisModel extends Model {
          */
     updateFromSeries(series) {
         const plotModel = this.plot.get('domainObject');
-        const label = _.get(plotModel, 'configuration.yAxis.label');
+        const label = plotModel?.configuration?.yAxis?.label;
         const sampleSeries = series.first();
         if (!sampleSeries) {
             if (!label) {

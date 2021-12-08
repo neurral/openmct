@@ -404,7 +404,7 @@ export default {
             }
         },
         containsObject(identifier) {
-            return _.get(this.domainObject, 'composition')
+            return this.domainObject.composition
                 .some(childId => this.openmct.objects.areIdsEqual(childId, identifier));
         },
         handleDragOver($event) {
@@ -494,7 +494,7 @@ export default {
             }
         },
         removeFromComposition(keyString) {
-            let composition = _.get(this.domainObject, 'composition');
+            let composition = this.domainObject.composition;
             composition = composition.filter(identifier => {
                 return this.openmct.objects.makeKeyString(identifier) !== keyString;
             });

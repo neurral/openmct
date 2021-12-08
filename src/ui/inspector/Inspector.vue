@@ -1,84 +1,88 @@
-/*****************************************************************************
- * Open MCT, Copyright (c) 2014-2021, United States Government
- * as represented by the Administrator of the National Aeronautics and Space
- * Administration. All rights reserved.
- *
- * Open MCT is licensed under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0.
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations
- * under the License.
- *
- * Open MCT includes source code licensed under additional open source
- * licenses. See the Open Source Licenses file (LICENSES.md) included with
- * this source code distribution or the Licensing information page available
- * at runtime from the About dialog for additional information.
- *****************************************************************************/
+<!-- eslint-disable vue/multi-word-component-names -->
+<!--
+ Open MCT, Copyright (c) 2009-2021, United States Government
+ as represented by the Administrator of the National Aeronautics and Space
+ Administration. All rights reserved.
+
+ Open MCT is licensed under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ http://www.apache.org/licenses/LICENSE-2.0.
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ License for the specific language governing permissions and limitations
+ under the License.
+
+ Open MCT includes source code licensed under additional open source
+ licenses. See the Open Source Licenses file (LICENSES.md) included with
+ this source code distribution or the Licensing information page available
+ at runtime from the About dialog for additional information.
+-->
 
 <template>
 <div class="c-inspector">
     <object-name />
-    <div v-if="showStyles"
-         class="c-inspector__tabs c-tabs"
+    <div
+        v-if="showStyles"
+        class="c-inspector__tabs c-tabs"
     >
-        <div v-for="tabbedView in tabbedViews"
-             :key="tabbedView.key"
-             class="c-inspector__tab c-tab"
-             :class="{'is-current': isCurrent(tabbedView)}"
-             @click="updateCurrentTab(tabbedView)"
+        <div
+            v-for="tabbedView in tabbedViews"
+            :key="tabbedView.key"
+            class="c-inspector__tab c-tab"
+            :class="{'is-current': isCurrent(tabbedView)}"
+            @click="updateCurrentTab(tabbedView)"
         >
             {{ tabbedView.name }}
         </div>
 
     </div>
     <div class="c-inspector__content">
-        <multipane v-show="currentTabbedView.key === '__properties'"
-                   type="vertical"
+        <multi-pane
+            v-show="currentTabbedView.key === '__properties'"
+            type="vertical"
         >
-            <pane class="c-inspector__properties">
+            <resizable-pane class="c-inspector__properties">
                 <Properties
                     v-if="!activity"
                 />
                 <location />
                 <inspector-views />
-            </pane>
-            <pane
+            </resizable-pane>
+            <resizable-pane
                 v-if="isEditing && hasComposition"
                 class="c-inspector__elements"
                 handle="before"
                 label="Elements"
             >
                 <elements-pool />
-            </pane>
-        </multipane>
-        <multipane
+            </resizable-pane>
+        </multi-pane>
+        <multi-pane
             v-show="currentTabbedView.key === '__styles'"
             type="vertical"
         >
-            <pane class="c-inspector__styles">
+            <resizable-pane class="c-inspector__styles">
                 <StylesInspectorView />
-            </pane>
-            <pane
+            </resizable-pane>
+            <resizable-pane
                 v-if="isEditing"
                 class="c-inspector__saved-styles"
                 handle="before"
                 label="Saved Styles"
             >
                 <SavedStylesInspectorView :is-editing="isEditing" />
-            </pane>
-        </multipane>
+            </resizable-pane>
+        </multi-pane>
     </div>
 </div>
 </template>
 
 <script>
-import multipane from '../layout/multipane.vue';
-import pane from '../layout/pane.vue';
+import MultiPane from '../layout/MultiPane.vue';
+import ResizablePane from '../layout/ResizablePane.vue';
 import ElementsPool from './ElementsPool.vue';
 import Location from './Location.vue';
 import Properties from './details/Properties.vue';
@@ -93,8 +97,8 @@ export default {
     components: {
         StylesInspectorView,
         SavedStylesInspectorView,
-        multipane,
-        pane,
+        MultiPane,
+        ResizablePane,
         ElementsPool,
         Properties,
         ObjectName,

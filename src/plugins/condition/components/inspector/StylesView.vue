@@ -22,8 +22,9 @@
 
 <template>
 <div class="c-inspector__styles c-inspect-styles">
-    <div v-if="isStaticAndConditionalStyles"
-         class="c-inspect-styles__mixed-static-and-conditional u-alert u-alert--block u-alert--with-icon"
+    <div
+        v-if="isStaticAndConditionalStyles"
+        class="c-inspect-styles__mixed-static-and-conditional u-alert u-alert--block u-alert--with-icon"
     >
         Your selection includes one or more items that use Conditional Styling. Applying a static style below will replace any Conditional Styling with the new choice.
     </div>
@@ -37,16 +38,18 @@
             @set-font-property="setFontProperty"
         />
         <div class="c-inspect-styles__content">
-            <div v-if="staticStyle"
-                 class="c-inspect-styles__style"
+            <div
+                v-if="staticStyle"
+                class="c-inspect-styles__style"
             >
-                <StyleEditor class="c-inspect-styles__editor"
-                             :style-item="staticStyle"
-                             :is-editing="allowEditing"
-                             :mixed-styles="mixedStyles"
-                             :non-specific-font-properties="nonSpecificFontProperties"
-                             @persist="updateStaticStyle"
-                             @save-style="saveStyle"
+                <StyleEditor
+                    class="c-inspect-styles__editor"
+                    :style-item="staticStyle"
+                    :is-editing="allowEditing"
+                    :mixed-styles="mixedStyles"
+                    :non-specific-font-properties="nonSpecificFontProperties"
+                    @persist="updateStaticStyle"
+                    @save-style="saveStyle"
                 />
             </div>
             <button
@@ -64,9 +67,10 @@
             Conditional Object Styles
         </div>
         <div class="c-inspect-styles__content c-inspect-styles__condition-set">
-            <a v-if="conditionSetDomainObject"
-               class="c-object-label"
-               @click="navigateOrPreview"
+            <a
+                v-if="conditionSetDomainObject"
+                class="c-object-label"
+                @click="navigateOrPreview"
             >
                 <span class="c-object-label__type-icon icon-conditional"></span>
                 <span class="c-object-label__name">{{ conditionSetDomainObject.name }}</span>
@@ -80,9 +84,10 @@
                     <span class="c-button__label">Change...</span>
                 </button>
 
-                <button class="c-click-icon icon-x"
-                        title="Remove conditional styles"
-                        @click="removeConditionSet"
+                <button
+                    class="c-click-icon icon-x"
+                    title="Remove conditional styles"
+                    @click="removeConditionSet"
                 ></button>
             </template>
         </div>
@@ -93,27 +98,32 @@
             @set-font-property="setFontProperty"
         />
 
-        <div v-if="conditionsLoaded"
-             class="c-inspect-styles__conditions"
+        <div
+            v-if="conditionsLoaded"
+            class="c-inspect-styles__conditions"
         >
-            <div v-for="(conditionStyle, index) in conditionalStyles"
-                 :key="index"
-                 class="c-inspect-styles__condition"
-                 :class="{'is-current': conditionStyle.conditionId === selectedConditionId}"
-                 @click="applySelectedConditionStyle(conditionStyle.conditionId)"
+            <div
+                v-for="(conditionStyle, index) in conditionalStyles"
+                :key="index"
+                class="c-inspect-styles__condition"
+                :class="{'is-current': conditionStyle.conditionId === selectedConditionId}"
+                @click="applySelectedConditionStyle(conditionStyle.conditionId)"
             >
-                <condition-error :show-label="true"
-                                 :condition="getCondition(conditionStyle.conditionId)"
+                <condition-error
+                    :show-label="true"
+                    :condition="getCondition(conditionStyle.conditionId)"
                 />
-                <condition-description :show-label="true"
-                                       :condition="getCondition(conditionStyle.conditionId)"
+                <condition-description
+                    :show-label="true"
+                    :condition="getCondition(conditionStyle.conditionId)"
                 />
-                <StyleEditor class="c-inspect-styles__editor"
-                             :style-item="conditionStyle"
-                             :non-specific-font-properties="nonSpecificFontProperties"
-                             :is-editing="allowEditing"
-                             @persist="updateConditionalStyle"
-                             @save-style="saveStyle"
+                <StyleEditor
+                    class="c-inspect-styles__editor"
+                    :style-item="conditionStyle"
+                    :non-specific-font-properties="nonSpecificFontProperties"
+                    :is-editing="allowEditing"
+                    @persist="updateConditionalStyle"
+                    @save-style="saveStyle"
                 />
             </div>
         </div>

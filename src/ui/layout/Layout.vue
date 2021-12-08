@@ -1,3 +1,5 @@
+<!-- eslint-disable vue/multi-word-component-names -->
+
 <template>
 <div
     class="l-shell"
@@ -44,12 +46,12 @@
 
     <div class="l-shell__drawer c-drawer c-drawer--push c-drawer--align-top"></div>
 
-    <multipane
+    <multi-pane
         class="l-shell__main"
         :class="[resizingClass]"
         type="horizontal"
     >
-        <pane
+        <resizable-pane
             class="l-shell__pane-tree"
             handle="after"
             label="Browse"
@@ -76,8 +78,8 @@
                 :reset-tree-navigation="triggerReset"
                 class="l-shell__tree"
             />
-        </pane>
-        <pane class="l-shell__pane-main">
+        </resizable-pane>
+        <resizable-pane class="l-shell__pane-main">
             <browse-bar
                 ref="browseBar"
                 class="l-shell__main-view-browse-bar"
@@ -99,8 +101,8 @@
                 :is="conductorComponent"
                 class="l-shell__time-conductor"
             />
-        </pane>
-        <pane
+        </resizable-pane>
+        <resizable-pane
             class="l-shell__pane-inspector l-pane--holds-multipane"
             handle="before"
             label="Inspect"
@@ -112,8 +114,8 @@
                 ref="inspector"
                 :is-editing="isEditing"
             />
-        </pane>
-    </multipane>
+        </resizable-pane>
+    </multi-pane>
 </div>
 </template>
 
@@ -123,8 +125,8 @@ import MctTree from './mct-tree.vue';
 import ObjectView from '../components/ObjectView.vue';
 import MctTemplate from '../legacy/mct-template.vue';
 import CreateButton from './CreateButton.vue';
-import multipane from './multipane.vue';
-import pane from './pane.vue';
+import MultiPane from './MultiPane.vue';
+import ResizablePane from './ResizablePane.vue';
 import BrowseBar from './BrowseBar.vue';
 import Toolbar from '../toolbar/Toolbar.vue';
 import AppLogo from './AppLogo.vue';
@@ -138,8 +140,8 @@ export default {
         ObjectView,
         'mct-template': MctTemplate,
         CreateButton,
-        multipane,
-        pane,
+        MultiPane,
+        ResizablePane,
         BrowseBar,
         Toolbar,
         AppLogo,

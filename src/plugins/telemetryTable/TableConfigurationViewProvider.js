@@ -20,65 +20,55 @@
  * at runtime from the About dialog for additional information.
  *****************************************************************************/
 
-define([
-    'objectUtils',
-    './components/table-configuration.vue',
-    './TelemetryTableConfiguration',
-    'vue'
-], function (
-    objectUtils,
-    TableConfigurationComponent,
-    TelemetryTableConfiguration,
-    Vue
-) {
+import TableConfigurationComponent from './components/table-configuration.vue';
+import TelemetryTableConfiguration from './TelemetryTableConfiguration';
+import Vue from 'vue';
 
-    function TableConfigurationViewProvider(openmct) {
-        return {
-            key: 'table-configuration',
-            name: 'Telemetry Table Configuration',
-            canView: function (selection) {
-                if (selection.length !== 1 || selection[0].length === 0) {
-                    return false;
-                }
-
-                let object = selection[0][0].context.item;
-
-                return object && object.type === 'table';
-            },
-            view: function (selection) {
-                let component;
-                let domainObject = selection[0][0].context.item;
-                let tableConfiguration = new TelemetryTableConfiguration(domainObject, openmct);
-
-                return {
-                    show: function (element) {
-                        component = new Vue({
-                            el: element,
-                            components: {
-                                TableConfiguration: TableConfigurationComponent.default
-                            },
-                            provide: {
-                                openmct,
-                                tableConfiguration
-                            },
-                            template: '<table-configuration></table-configuration>'
-                        });
-                    },
-                    destroy: function () {
-                        if (component) {
-                            component.$destroy();
-                            component = undefined;
-                        }
-
-                        tableConfiguration = undefined;
-                    }
-                };
-            },
-            priority: function () {
-                return 1;
+export default
+function TableConfigurationViewProvider(openmct) {
+    return {
+        key: 'table-configuration',
+        name: 'Telemetry Table Configuration',
+        canView: function (selection) {
+            if (selection.length !== 1 || selection[0].length === 0) {
+                return false;
             }
-        };
-    }
 
-    return TableConfigurationViewProvider;
-});
+            let object = selection[0][0].context.item;
+
+            return object && object.type === 'table';
+        },
+        view: function (selection) {
+            let component;
+            let domainObject = selection[0][0].context.item;
+            let tableConfiguration = new TelemetryTableConfiguration(domainObject, openmct);
+
+            return {
+                show: function (element) {
+                    component = new Vue({
+                        el: element,
+                        components: {
+                            TableConfiguration: TableConfigurationComponent.default
+                        },
+                        provide: {
+                            openmct,
+                            tableConfiguration
+                        },
+                        template: '<table-configuration></table-configuration>'
+                    });
+                },
+                destroy: function () {
+                    if (component) {
+                        component.$destroy();
+                        component = undefined;
+                    }
+
+                    tableConfiguration = undefined;
+                }
+            };
+        },
+        priority: function () {
+            return 1;
+        }
+    };
+}

@@ -1,24 +1,25 @@
-/*****************************************************************************
-* Open MCT, Copyright (c) 2014-2021, United States Government
-* as represented by the Administrator of the National Aeronautics and Space
-* Administration. All rights reserved.
-*
-* Open MCT is licensed under the Apache License, Version 2.0 (the
-* "License"); you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-* http://www.apache.org/licenses/LICENSE-2.0.
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-* WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-* License for the specific language governing permissions and limitations
-* under the License.
-*
-* Open MCT includes source code licensed under additional open source
-* licenses. See the Open Source Licenses file (LICENSES.md) included with
-* this source code distribution or the Licensing information page available
-* at runtime from the About dialog for additional information.
-*****************************************************************************/
+<!-- eslint-disable vue/multi-word-component-names -->
+<!--
+ Open MCT, Copyright (c) 2014-2021, United States Government
+ as represented by the Administrator of the National Aeronautics and Space
+ Administration. All rights reserved.
+
+ Open MCT is licensed under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ http://www.apache.org/licenses/LICENSE-2.0.
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ License for the specific language governing permissions and limitations
+ under the License.
+
+ Open MCT includes source code licensed under additional open source
+ licenses. See the Open Source Licenses file (LICENSES.md) included with
+ this source code distribution or the Licensing information page available
+ at runtime from the About dialog for additional information.
+-->
 
 <template>
 <div class="u-contents">
@@ -26,76 +27,89 @@
     <span class="c-cdef__label">{{ setRowLabel }}</span>
     <span class="c-cdef__controls">
         <span class="c-cdef__control">
-            <select ref="telemetrySelect"
-                    v-model="criterion.telemetry"
-                    @change="updateMetadataOptions"
+            <select
+                ref="telemetrySelect"
+                v-model="criterion.telemetry"
+                @change="updateMetadataOptions"
             >
                 <option value="">- Select Telemetry -</option>
                 <option value="all">all telemetry</option>
                 <option value="any">any telemetry</option>
-                <option v-for="telemetryOption in telemetry"
-                        :key="telemetryOption.identifier.key"
-                        :value="telemetryOption.identifier"
+                <option
+                    v-for="telemetryOption in telemetry"
+                    :key="telemetryOption.identifier.key"
+                    :value="telemetryOption.identifier"
                 >
                     {{ telemetryOption.name }}
                 </option>
             </select>
         </span>
-        <span v-if="criterion.telemetry"
-              class="c-cdef__control"
+        <span
+            v-if="criterion.telemetry"
+            class="c-cdef__control"
         >
-            <select ref="metadataSelect"
-                    v-model="criterion.metadata"
-                    @change="updateOperations"
+            <select
+                ref="metadataSelect"
+                v-model="criterion.metadata"
+                @change="updateOperations"
             >
                 <option value="">- Select Field -</option>
-                <option v-for="option in telemetryMetadataOptions"
-                        :key="option.key"
-                        :value="option.key"
+                <option
+                    v-for="option in telemetryMetadataOptions"
+                    :key="option.key"
+                    :value="option.key"
                 >
                     {{ option.name }}
                 </option>
                 <option value="dataReceived">any data received</option>
             </select>
         </span>
-        <span v-if="criterion.telemetry && criterion.metadata"
-              class="c-cdef__control"
+        <span
+            v-if="criterion.telemetry && criterion.metadata"
+            class="c-cdef__control"
         >
-            <select v-model="criterion.operation"
-                    @change="updateInputVisibilityAndValues"
+            <select
+                v-model="criterion.operation"
+                @change="updateInputVisibilityAndValues"
             >
                 <option value="">- Select Comparison -</option>
-                <option v-for="option in filteredOps"
-                        :key="option.name"
-                        :value="option.name"
+                <option
+                    v-for="option in filteredOps"
+                    :key="option.name"
+                    :value="option.name"
                 >
                     {{ option.text }}
                 </option>
             </select>
             <template v-if="!enumerations.length">
-                <span v-for="(item, inputIndex) in inputCount"
-                      :key="inputIndex"
-                      class="c-cdef__control__inputs"
+                <span
+                    v-for="(item, inputIndex) in inputCount"
+                    :key="inputIndex"
+                    class="c-cdef__control__inputs"
                 >
-                    <input v-model="criterion.input[inputIndex]"
-                           class="c-cdef__control__input"
-                           :type="setInputType"
-                           @change="persist"
+                    <input
+                        v-model="criterion.input[inputIndex]"
+                        class="c-cdef__control__input"
+                        :type="setInputType"
+                        @change="persist"
                     >
                     <span v-if="inputIndex < inputCount-1">and</span>
                 </span>
                 <span v-if="criterion.metadata === 'dataReceived'">seconds</span>
             </template>
             <span v-else>
-                <span v-if="inputCount && criterion.operation"
-                      class="c-cdef__control"
+                <span
+                    v-if="inputCount && criterion.operation"
+                    class="c-cdef__control"
                 >
-                    <select v-model="criterion.input[0]"
-                            @change="persist"
+                    <select
+                        v-model="criterion.input[0]"
+                        @change="persist"
                     >
-                        <option v-for="option in enumerations"
-                                :key="option.string"
-                                :value="option.value.toString()"
+                        <option
+                            v-for="option in enumerations"
+                            :key="option.string"
+                            :value="option.value.toString()"
                         >
                             {{ option.string }}
                         </option>
