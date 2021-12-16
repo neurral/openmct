@@ -55,7 +55,9 @@ const webpackConfig = {
             "utils": path.join(__dirname, "src/utils")
         }
     },
-    devtool: devMode ? 'eval-source-map' : 'source-map',
+    // devtool: devMode ? 'eval-source-map' : 'source-map',
+    // devtool: devMode ? 'cheap-module-source-map' : 'source-map',
+    devtool: devMode ? /*none*/false : 'source-map',
     plugins: [
         new webpack.DefinePlugin({
             __OPENMCT_VERSION__: `'${packageDefinition.version}'`,
@@ -88,7 +90,19 @@ const webpackConfig = {
         rules: [
             {
                 test: /\.vue$/,
-                use: 'vue-loader'
+                use: {
+                    loader: 'vue-loader'
+                    // Attempt to use Babel with babel-plugin-istanbul
+                    // options: {
+                    //     compiler: require('vue-template-babel-compiler')
+                    // }
+                }
+            },
+            {
+                test: /\.js$/,
+                use: {
+                    loader: 'babel-loader'
+                }
             },
             {
                 test: /\.(sc|sa|c)ss$/,

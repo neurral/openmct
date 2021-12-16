@@ -28,6 +28,7 @@
 >
     <template v-if="viewBounds && !options.compact">
         <swim-lane>
+            <div>The count is {{ timeSystem.name ? timeSystem.name : timeSystem.bar }}</div>
             <template slot="label">{{ timeSystem.name }}</template>
             <timeline-axis
                 slot="object"
