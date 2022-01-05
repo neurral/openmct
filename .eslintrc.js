@@ -241,6 +241,7 @@ module.exports = {
             "singleline": 1,
             "multiline": 1,
         }],
+        "vue/multi-word-component-names": "warn",
         "vue/multiline-html-element-content-newline": "off",
         "vue/singleline-html-element-content-newline": "off",
         "vue/no-mutating-props": "off"

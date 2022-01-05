@@ -22,13 +22,15 @@
 
 <template>
 <span class="form-control shell">
-    <span class="field control"
-          :class="model.cssClass"
+    <span
+        class="field control"
+        :class="model.cssClass"
     >
-        <textarea v-model="field"
-                  type="text"
-                  :size="model.size"
-                  @blur="blur()"
+        <textarea
+            v-model="field"
+            type="text"
+            :size="model.size"
+            @blur="blur()"
         >
         </textarea>
     </span>

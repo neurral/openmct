@@ -22,34 +22,40 @@
 
 <template>
 <div class="u-contents">
-    <div v-if="title.length"
-         class="c-overlay__top-bar"
+    <div
+        v-if="title.length"
+        class="c-overlay__top-bar"
     >
         <div class="c-overlay__dialog-title">{{ title }}</div>
     </div>
-    <div class="c-selector c-tree-and-search"
-         :class="cssClass"
+    <div
+        class="c-selector c-tree-and-search"
+        :class="cssClass"
     >
         <div class="c-tree-and-search__search">
-            <Search ref="shell-search"
-                    class="c-search"
-                    :value="searchValue"
-                    @input="searchTree"
-                    @clear="searchTree"
+            <Search
+                ref="shell-search"
+                class="c-search"
+                :value="searchValue"
+                @input="searchTree"
+                @clear="searchTree"
             />
         </div>
 
-        <div v-if="isLoading"
-             class="c-tree-and-search__loading loading"
+        <div
+            v-if="isLoading"
+            class="c-tree-and-search__loading loading"
         ></div>
 
-        <div v-if="shouldDisplayNoResultsText"
-             class="c-tree-and-search__no-results"
+        <div
+            v-if="shouldDisplayNoResultsText"
+            class="c-tree-and-search__no-results"
         >
             No results found
         </div>
 
-        <ul v-if="!isLoading"
+        <ul
+            v-if="!isLoading"
             v-show="!searchValue"
             class="c-tree-and-search__tree c-tree"
         >
@@ -63,7 +69,8 @@
             />
         </ul>
 
-        <ul v-if="searchValue && !isLoading"
+        <ul
+            v-if="searchValue && !isLoading"
             class="c-tree-and-search__tree c-tree"
         >
             <SelectorDialogTreeItem

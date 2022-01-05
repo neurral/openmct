@@ -1,15 +1,18 @@
 <template>
 <div>
-    <div v-if="domainObject && domainObject.type === 'time-strip'"
-         class="c-conductor-holder--compact l-shell__main-independent-time-conductor"
+    <div
+        v-if="domainObject && domainObject.type === 'time-strip'"
+        class="c-conductor-holder--compact l-shell__main-independent-time-conductor"
     >
-        <independent-time-conductor :domain-object="domainObject"
-                                    @stateChanged="updateIndependentTimeState"
-                                    @updated="saveTimeOptions"
+        <independent-time-conductor
+            :domain-object="domainObject"
+            @stateChanged="updateIndependentTimeState"
+            @updated="saveTimeOptions"
         />
     </div>
-    <div ref="objectViewWrapper"
-         class="c-object-view"
+    <div
+        ref="objectViewWrapper"
+        class="c-object-view"
     ></div>
 </div>
 </template>

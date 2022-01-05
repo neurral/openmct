@@ -21,10 +21,11 @@
 *****************************************************************************/
 
 <template>
-<SelectorDialogTree :ignore-type-check="true"
-                    :css-class="`form-locator c-form-control--locator`"
-                    :parent="model.parent"
-                    @treeItemSelected="handleItemSelection"
+<SelectorDialogTree
+    :ignore-type-check="true"
+    :css-class="`form-locator c-form-control--locator`"
+    :parent="model.parent"
+    @treeItemSelected="handleItemSelection"
 />
 </template>
 
